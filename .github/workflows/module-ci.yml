@@ -1,0 +1,51 @@
+name: Module CI
+
+on:
+  push:
+    branches: [main]
+    tags: ['*']
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: module-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: SwiftLint
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install SwiftLint
+        run: brew install swiftlint
+      - name: Check code style
+        run: swiftlint lint --config .swiftlint.yml
+
+  unit-tests:
+    name: Domain tests and coverage
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run business-logic tests
+        run: swift test --enable-code-coverage
+      - name: Show coverage summary
+        run: |
+          TEST_BINARY=$(find .build -type f -path '*GameCatalogModulesPackageTests.xctest/Contents/MacOS/GameCatalogModulesPackageTests' | head -1)
+          PROFILE=$(find .build -type f -name default.profdata | head -1)
+          xcrun llvm-cov report \
+            "$TEST_BINARY" \
+            -instr-profile "$PROFILE" \
+            -ignore-filename-regex='Tests/'
+
+  ios-build:
+    name: Build every iOS module
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build package for iOS Simulator
+        run: |
+          xcodebuild clean build \
+            -scheme GameCatalogModules \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO

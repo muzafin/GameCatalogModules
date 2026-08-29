@@ -1,0 +1,14 @@
+"tab.home" = "Beranda";
+"tab.favorite" = "Favorit";
+"tab.about" = "Tentang";
+"home.title" = "Katalog Game";
+"home.search" = "Cari game...";
+"home.empty" = "Game tidak ditemukan.";
+"favorite.title" = "Favorit";
+"favorite.empty.title" = "Belum Ada Favorit";
+"favorite.empty.message" = "Tambahkan game dari halaman detail dengan menekan ikon hati.";
+"detail.description" = "Deskripsi";
+"about.title" = "Tentang";
+"error.title" = "Oops!";
+"action.retry" = "Coba Lagi";
+"rating.reviews" = "ulasan";

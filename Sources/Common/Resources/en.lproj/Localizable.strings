@@ -1,0 +1,14 @@
+"tab.home" = "Home";
+"tab.favorite" = "Favorites";
+"tab.about" = "About";
+"home.title" = "Game Catalog";
+"home.search" = "Search games...";
+"home.empty" = "No games found.";
+"favorite.title" = "Favorites";
+"favorite.empty.title" = "No Favorites Yet";
+"favorite.empty.message" = "Add a game from its detail page by tapping the heart icon.";
+"detail.description" = "Description";
+"about.title" = "About";
+"error.title" = "Oops!";
+"action.retry" = "Try Again";
+"rating.reviews" = "reviews";
