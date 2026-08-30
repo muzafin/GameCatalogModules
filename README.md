@@ -9,7 +9,7 @@ Platform minimum adalah iOS 15. Domain tests juga mendukung macOS 12 untuk eksek
 ## Tests
 
 ```bash
-swift test --enable-code-coverage
+swift test --package-path DomainTests --enable-code-coverage
 ```
 
 Feature modules bergantung pada Domain dan Common. Data bergantung pada Domain untuk mengimplementasikan repository protocol. Domain tidak bergantung pada UIKit, Core Data, atau detail Data layer.

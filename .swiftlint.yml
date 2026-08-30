@@ -1,6 +1,6 @@
 included:
   - Sources
-  - Tests
+  - DomainTests/Tests
 
 excluded:
   - .build

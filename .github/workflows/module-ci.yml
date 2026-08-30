@@ -28,11 +28,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run business-logic tests
-        run: swift test --enable-code-coverage
+        run: swift test --package-path DomainTests --enable-code-coverage
       - name: Show coverage summary
         run: |
-          TEST_BINARY=$(find .build -type f -path '*GameCatalogModulesPackageTests.xctest/Contents/MacOS/GameCatalogModulesPackageTests' | head -1)
-          PROFILE=$(find .build -type f -name default.profdata | head -1)
+          TEST_BINARY=$(find DomainTests/.build -type f -path '*GameCatalogDomainTestsPackageTests.xctest/Contents/MacOS/GameCatalogDomainTestsPackageTests' | head -1)
+          PROFILE=$(find DomainTests/.build -type f -name default.profdata | head -1)
           xcrun llvm-cov report \
             "$TEST_BINARY" \
             -instr-profile "$PROFILE" \
@@ -45,7 +45,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build package for iOS Simulator
         run: |
-          xcodebuild clean build \
-            -scheme GameCatalogModules \
-            -destination 'generic/platform=iOS Simulator' \
-            CODE_SIGNING_ALLOWED=NO
+          for scheme in GameCatalogDomain GameCatalogData Common HomeFeature DetailFeature FavoriteFeature AboutFeature; do
+            xcodebuild clean build \
+              -scheme "$scheme" \
+              -destination 'generic/platform=iOS Simulator' \
+              CODE_SIGNING_ALLOWED=NO
+          done

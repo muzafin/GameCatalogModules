@@ -25,7 +25,6 @@ let package = Package(
         .target(name: "HomeFeature", dependencies: ["GameCatalogDomain", "Common"]),
         .target(name: "DetailFeature", dependencies: ["GameCatalogDomain", "Common"]),
         .target(name: "FavoriteFeature", dependencies: ["GameCatalogDomain", "Common"]),
-        .target(name: "AboutFeature", dependencies: ["GameCatalogDomain", "Common"]),
-        .testTarget(name: "GameCatalogDomainTests", dependencies: ["GameCatalogDomain"])
+        .target(name: "AboutFeature", dependencies: ["GameCatalogDomain", "Common"])
     ]
 )
